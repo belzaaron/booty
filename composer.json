@@ -1,0 +1,41 @@
+{
+    "name": "belzaaron/booty",
+    "description": ":package_description",
+    "license": "license",
+    "authors": [
+        {
+            "name": "author name",
+            "email": "author email",
+            "homepage": "author homepage"
+        }
+    ],
+    "homepage": "https://github.com/belzaaron/booty",
+    "keywords": ["Laravel", "Booty"],
+    "require": {
+        "illuminate/support": "~7|~8"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "~9.0",
+        "orchestra/testbench": "~5|~6"
+    },
+    "autoload": {
+        "psr-4": {
+            "Belzaaron\\Booty\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Belzaaron\\Booty\\Tests\\": "tests"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Belzaaron\\Booty\\BootyServiceProvider"
+            ],
+            "aliases": {
+                "Booty": "Belzaaron\\Booty\\Facades\\Booty"
+            }
+        }
+    }
+}
