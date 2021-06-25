@@ -2,6 +2,8 @@
 
 namespace Belzaaron\Booty;
 
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\ServiceProvider;
 
 class BootyServiceProvider extends ServiceProvider
@@ -13,40 +15,15 @@ class BootyServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'belzaaron');
-        // $this->loadViewsFrom(__DIR__.'/../resources/views', 'belzaaron');
-        // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
-        // $this->loadRoutesFrom(__DIR__.'/routes.php');
+        $this->loadViewsFrom(__DIR__.'/../resources/views', 'booty');
 
-        // Publishing is only necessary when using the CLI.
+        $components = new Collection(File::allFiles(__DIR__.'/View/Components'));
+
+        $this->loadViewComponentsAs('booty', $components->pluck('pathname')->all());
+
         if ($this->app->runningInConsole()) {
             $this->bootForConsole();
         }
-    }
-
-    /**
-     * Register any package services.
-     *
-     * @return void
-     */
-    public function register(): void
-    {
-        $this->mergeConfigFrom(__DIR__.'/../config/booty.php', 'booty');
-
-        // Register the service the package provides.
-        $this->app->singleton('booty', function ($app) {
-            return new Booty;
-        });
-    }
-
-    /**
-     * Get the services provided by the provider.
-     *
-     * @return array
-     */
-    public function provides()
-    {
-        return ['booty'];
     }
 
     /**
@@ -56,27 +33,12 @@ class BootyServiceProvider extends ServiceProvider
      */
     protected function bootForConsole(): void
     {
-        // Publishing the configuration file.
         $this->publishes([
-            __DIR__.'/../config/booty.php' => config_path('booty.php'),
-        ], 'booty.config');
+            __DIR__.'/../resources/views' => base_path('resources/views/vendor/belzaaron/booty'),
+        ], 'booty-views');
 
-        // Publishing the views.
-        /*$this->publishes([
-            __DIR__.'/../resources/views' => base_path('resources/views/vendor/belzaaron'),
-        ], 'booty.views');*/
-
-        // Publishing assets.
-        /*$this->publishes([
-            __DIR__.'/../resources/assets' => public_path('vendor/belzaaron'),
-        ], 'booty.views');*/
-
-        // Publishing the translation files.
-        /*$this->publishes([
-            __DIR__.'/../resources/lang' => resource_path('lang/vendor/belzaaron'),
-        ], 'booty.views');*/
-
-        // Registering package commands.
-        // $this->commands([]);
+        $this->publishes([
+            __DIR__.'/../src/View/Components/' => app_path('View/Components'),
+        ], 'booty-components');
     }
 }

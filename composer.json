@@ -1,41 +1,34 @@
 {
     "name": "belzaaron/booty",
-    "description": ":package_description",
-    "license": "license",
-    "authors": [
-        {
-            "name": "author name",
-            "email": "author email",
-            "homepage": "author homepage"
-        }
+    "description": "A collection of Bootstrap 5 views for Laravel.",
+    "keywords": [
+        "belzaaron",
+        "booty"
     ],
     "homepage": "https://github.com/belzaaron/booty",
-    "keywords": ["Laravel", "Booty"],
+    "license": "The Unlicense",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Aaron Belz",
+            "email": "belzaaron@gmail.com",
+            "role": "Developer"
+        }
+    ],
     "require": {
-        "illuminate/support": "~7|~8"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "~9.0",
-        "orchestra/testbench": "~5|~6"
+        "php": "^7.4|^8.0",
+        "illuminate/support": "^8.0"
     },
     "autoload": {
         "psr-4": {
             "Belzaaron\\Booty\\": "src/"
         }
     },
-    "autoload-dev": {
-        "psr-4": {
-            "Belzaaron\\Booty\\Tests\\": "tests"
-        }
-    },
     "extra": {
         "laravel": {
             "providers": [
                 "Belzaaron\\Booty\\BootyServiceProvider"
-            ],
-            "aliases": {
-                "Booty": "Belzaaron\\Booty\\Facades\\Booty"
-            }
+            ]
         }
     }
 }
