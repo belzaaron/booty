@@ -2,8 +2,7 @@
 
 namespace Belzaaron\Booty;
 
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\File;
+use Belzaaron\Booty\View\Components;
 use Illuminate\Support\ServiceProvider;
 
 class BootyServiceProvider extends ServiceProvider
@@ -17,9 +16,13 @@ class BootyServiceProvider extends ServiceProvider
     {
         $this->loadViewsFrom(__DIR__.'/../resources/views', 'booty');
 
-        $components = new Collection(File::allFiles(__DIR__.'/View/Components'));
-
-        $this->loadViewComponentsAs('booty', $components->pluck('pathname')->all());
+        $this->loadViewComponentsAs('booty', [
+            Components\Group::class,
+            Components\Label::class,
+            Components\Input::class,
+            Components\Error::class,
+            Components\Set::class,
+        ]);
 
         if ($this->app->runningInConsole()) {
             $this->bootForConsole();
