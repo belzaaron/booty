@@ -6,7 +6,7 @@
         "booty"
     ],
     "homepage": "https://github.com/belzaaron/booty",
-    "license": "The Unlicense",
+    "license": "MIT",
     "type": "library",
     "authors": [
         {
