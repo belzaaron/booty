@@ -11,7 +11,7 @@
         <div class="input-group">
     @endif
     
-    <x-booty-input :name="$name" :invalid="$errors->has($name)" {{ $attributes->execpt(['help']) }} />
+    <x-booty-input :name="$name" :invalid="$errors->has($name)" {{ $attributes->except(['help']) }} />
 
     @if ($slot->isNotEmpty())
         {{ $slot }}
